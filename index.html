@@ -3,44 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Link</title>
+    <title>Portfolio Link - Enhanced</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
         /* ====================================================
         CSS STYLES
         ====================================================
         */
         :root {
-            /* Define a slightly off-white color for better readability against pure black */
             --text-color: #F0F0F0; 
-            --accent-color: #007BFF; /* A subtle blue for the button border/shadow */
+            --accent-color: #00AEEF; /* A brighter, more attractive blue */
             --dark-background: #000000;
         }
 
         body {
-            /* Full black background, text centered */
+            /* Use Roboto and ensure full viewport */
             background-color: var(--dark-background);
             color: var(--text-color);
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif; /* Applied Roboto */
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center;   /* Center vertically */
-            min-height: 100vh;     /* Ensure full viewport height */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             text-align: center;
+            overflow: hidden; /* Prevent scrollbar if animation is too large */
+        }
+
+        /* 2. SUBTLE BACKGROUND ANIMATION */
+        /* Inspired by a subtle 'star field' or 'digital static' */
+        .background-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 0) 0 0 / 50px 50px,
+                radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 0) 25px 25px / 50px 50px;
+            /* Simple movement animation to make it feel alive */
+            animation: moveDots 60s linear infinite;
+            z-index: -1; /* Keep behind the content */
+        }
+        
+        @keyframes moveDots {
+            from { background-position: 0 0, 25px 25px; }
+            to { background-position: 50px 50px, 75px 75px; }
         }
 
         .container {
-            /* Max width to keep the content from spanning the whole page on large screens */
+            /* Ensure content is above the background and looks crisp */
             max-width: 90%;
             padding: 20px;
+            z-index: 10; 
         }
 
         h1 {
-            /* Main text style */
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: 300; /* Lighter font weight for a modern look */
+            /* Main text style, using a light weight for elegance */
+            font-size: 2.8em; /* Slightly larger text */
+            margin-bottom: 25px;
+            font-weight: 300; /* Roboto Light */
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Helps text pop on subtle background */
         }
 
         .cta-button {
@@ -48,29 +75,31 @@
             background-color: transparent;
             color: var(--text-color);
             border: 2px solid var(--text-color);
-            padding: 10px 30px;
-            font-size: 1.2em;
+            padding: 12px 35px; /* Slightly larger padding */
+            font-size: 1.3em;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 400; /* Roboto Regular */
             transition: 
                 border-color 0.3s ease, 
                 color 0.3s ease, 
-                transform 0.3s ease, 
+                transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* Added a 'spring' effect */
                 box-shadow 0.3s ease;
         }
 
         .cta-button:hover {
-            /* Button hover effect - subtle visual 'pop' with a shadow/glow */
+            /* Hover effect: Subtle blue glow and the "pop" spring */
             border-color: var(--accent-color);
             color: var(--accent-color);
-            box-shadow: 0 0 10px var(--accent-color); 
-            transform: scale(1.05); /* JS is not strictly needed for this, but it enhances the theme */
+            box-shadow: 0 0 15px var(--accent-color), 0 0 5px var(--accent-color) inset; 
+            transform: scale(1.1); 
         }
 
     </style>
 </head>
 <body>
+    <div class="background-dots"></div>
 
     <div class="container">
         <h1>Visit my Portfolio website</h1>
@@ -83,32 +112,24 @@
     <script>
         const button = document.getElementById('portfolioButton');
 
-        // This JS is for a subtle animation on click and a logical action
         button.addEventListener('click', () => {
-            // 1. Add a temporary class for a quick 'flash' effect on click
-            button.style.backgroundColor = 'var(--accent-color)';
-            button.style.color = 'var(--dark-background)';
+            // Placeholder link for your portfolio
+            const portfolioUrl = 'https://www.google.com'; 
+
+            // Temporary visual feedback (quick flash to accent color)
+            button.style.cssText = `
+                background-color: var(--accent-color);
+                color: var(--dark-background);
+                transform: scale(0.95); /* Quick press effect */
+            `;
             
-            // In a real scenario, you'd replace 'your-portfolio-url.com' with the actual link
-            const portfolioUrl = 'https://www.google.com'; // Placeholder link
-
-            // 2. Revert the color change after a brief delay
+            // Revert and navigate after brief delay
             setTimeout(() => {
-                button.style.backgroundColor = 'transparent';
-                button.style.color = 'var(--accent-color)'; // Keep the accent color after click
+                button.style.cssText = ''; // Clear inline style to use CSS rules again
                 
-                // 3. Navigate to the portfolio link
-                window.open(portfolioUrl, '_blank'); // Opens in a new tab
-            }, 150); // Flash duration
-        });
-
-        // Add a focus state to mimic the hover when using keyboard navigation
-        button.addEventListener('focus', () => {
-            button.classList.add('cta-button:hover');
-        });
-
-        button.addEventListener('blur', () => {
-            button.classList.remove('cta-button:hover');
+                // Navigate to the portfolio link
+                window.open(portfolioUrl, '_blank');
+            }, 100); 
         });
     </script>
 </body>
