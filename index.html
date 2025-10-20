@@ -8,129 +8,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ====================================================
-        CSS STYLES
-        ====================================================
-        */
-        :root {
-            --text-color: #F0F0F0; 
-            --accent-color: #00AEEF; /* A brighter, more attractive blue */
-            --dark-background: #000000;
-        }
+        * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-        body {
-            /* Use Roboto and ensure full viewport */
-            background-color: var(--dark-background);
-            color: var(--text-color);
-            font-family: 'Roboto', sans-serif; /* Applied Roboto */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-            overflow: hidden; /* Prevent scrollbar if animation is too large */
-        }
+body,
+html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
 
-        /* 2. SUBTLE BACKGROUND ANIMATION */
-        /* Inspired by a subtle 'star field' or 'digital static' */
-        .background-dots {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 0) 0 0 / 50px 50px,
-                radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 0) 25px 25px / 50px 50px;
-            /* Simple movement animation to make it feel alive */
-            animation: moveDots 60s linear infinite;
-            z-index: -1; /* Keep behind the content */
-        }
-        
-        @keyframes moveDots {
-            from { background-position: 0 0, 25px 25px; }
-            to { background-position: 50px 50px, 75px 75px; }
-        }
+.background {
+  background-image: url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Replace with your own construction image */
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  position: relative;
+}
 
-        .container {
-            /* Ensure content is above the background and looks crisp */
-            max-width: 90%;
-            padding: 20px;
-            z-index: 10; 
-        }
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 
-        h1 {
-            /* Main text style, using a light weight for elegance */
-            font-size: 2.8em; /* Slightly larger text */
-            margin-bottom: 25px;
-            font-weight: 300; /* Roboto Light */
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Helps text pop on subtle background */
-        }
+.content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 20px;
+}
 
-        .cta-button {
-            /* Button base style */
-            background-color: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--text-color);
-            padding: 12px 35px; /* Slightly larger padding */
-            font-size: 1.3em;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 400; /* Roboto Regular */
-            transition: 
-                border-color 0.3s ease, 
-                color 0.3s ease, 
-                transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* Added a 'spring' effect */
-                box-shadow 0.3s ease;
-        }
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #ffc107;
+}
 
-        .cta-button:hover {
-            /* Hover effect: Subtle blue glow and the "pop" spring */
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            box-shadow: 0 0 15px var(--accent-color), 0 0 5px var(--accent-color) inset; 
-            transform: scale(1.1); 
-        }
+p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+}
+
+.tagline {
+  font-style: italic;
+  font-size: 1rem;
+  color: #f0ad4e;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
 
     </style>
 </head>
 <body>
-    <div class="background-dots"></div>
-
-    <div class="container">
-        <h1>Visit my Portfolio website</h1>
-        
-        <button id="portfolioButton" class="cta-button">
-            Click Here
-        </button>
-    </div>
-
-    <script>
-        const button = document.getElementById('portfolioButton');
-
-        button.addEventListener('click', () => {
-            // Placeholder link for your portfolio
-            const portfolioUrl = 'https://www.google.com'; 
-
-            // Temporary visual feedback (quick flash to accent color)
-            button.style.cssText = `
-                background-color: var(--accent-color);
-                color: var(--dark-background);
-                transform: scale(0.95); /* Quick press effect */
-            `;
-            
-            // Revert and navigate after brief delay
-            setTimeout(() => {
-                button.style.cssText = ''; // Clear inline style to use CSS rules again
-                
-                // Navigate to the portfolio link
-                window.open(portfolioUrl, '_blank');
-            }, 100); 
-        });
-    </script>
+    <div class="background">
+  <div class="overlay"></div>
+  <div class="content">
+    <h1><a href="https://mxtuhin.ninja" target="_blank">Click Here !</a></h1>
+    <p>
+      Please click the link Above to visit my Portfolio Website.
+    </p>
+    <p class="tagline">Robot Mind, Game Development Wizard. Building Worlds, One Algorithm at a time.</p>
+  </div>
+</div>
 </body>
 </html>
